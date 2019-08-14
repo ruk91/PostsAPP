@@ -9,7 +9,6 @@ class HomeScreen extends React.Component {
 
     constructor() {
         super();
-        // const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});  
         this.state = {
             loading: true,
             dataSource:'',
@@ -18,7 +17,6 @@ class HomeScreen extends React.Component {
 
     componentDidMount() {
         this._retrieveData();
-        // this.getPostsFromApi();
     }
 
     async getPostsFromApi() {
@@ -27,6 +25,7 @@ class HomeScreen extends React.Component {
               'https://jsonplaceholder.typicode.com/posts',
             );
             let responseJson = await response.json();
+            console.log('fetched Data from api--->');
             this.setState({
                 dataSource: responseJson,
                 loading: false
@@ -41,7 +40,7 @@ class HomeScreen extends React.Component {
     _storeData = async () => {
         try {
             await AsyncStorage.setItem('postsData', JSON.stringify(this.state.dataSource));
-            console.log('data storedd in cache');
+            console.log('data stored in cache');
         } catch (error) {
             console.error(error);
         }
@@ -55,19 +54,15 @@ class HomeScreen extends React.Component {
                     dataSource: JSON.parse(value),
                     loading: false
                 })
-                // We have data!!
-                // alert(value);
                 console.log('fetched Data from cache--->');
+            } else {
+                this.getPostsFromApi();
             }
         } catch (error) {
             // Error retrieving data
             console.log(error);
         }
     }
-
-    // _onPostPress () {
-    //     this.props.navigation.navigate('Profile', {title: "item.title"});
-    // }
 
     _onRefresh = () => {
         this.setState({refreshing: true});
@@ -81,7 +76,7 @@ class HomeScreen extends React.Component {
         const { navigate } = this.props.navigation;
 
         if (!loading) {
-              return (
+            return (
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -105,17 +100,15 @@ class HomeScreen extends React.Component {
                                             });
                                         }}
                                     >
-                                        <View style={{ backgroundColor: '#E4E4E4', alignItems:'center', justifyContent:'center', borderRadius: 20, padding: 5,  margin:10, minHeight: 40}}>
+                                        <View style={{ backgroundColor: '#E4E4E4', borderRadius: 20, padding: 5,  margin:10, minHeight: 40}}>
                                             <Text style={{fontSize:22}}>{item.title}</Text>
                                         </View>
                                     </TouchableOpacity>
-                                    
                                 )
                             }}      
                         />
-              </ScrollView>
-                
-              )
+                </ScrollView>         
+            )
         } else {
             return (
                 <ActivityIndicator/>
