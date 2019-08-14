@@ -4,9 +4,41 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const window = Dimensions.get('window');
 class HomeScreen extends React.Component {
-    static navigationOptions = {
-      title: 'Posts List',
+    // static navigationOptions = {
+    //   title: 'Posts List',
+    // };
+    static navigationOptions = ({navigation}) => {
+        
+        const {state} = navigation;
+
+        return {
+            title: 'Posts',
+            headerTintColor: '#000',
+                titleStyle: {
+                    color: '#000',
+                },
+            headerLeft: null,
+            headerStyle: { 
+                backgroundColor: 'transparent', 
+                // position: 'absolute',
+                // top: 0,
+                // left: 0,
+                // right: 0,
+                elevation:0,
+                borderBottomColor: 'transparent'
+            },
+            headerTitleStyle:{
+                fontFamily:'Nunito-Black',
+                // fontWeight:'normal',
+                fontSize:(window.height)*0.03,
+                alignSelf:'center',
+                textAlign:'center',
+                flex: 1,
+            },
+        };
+        
     };
+
 
     constructor() {
         super();
@@ -133,7 +165,7 @@ class HomeScreen extends React.Component {
                                                 style={{
                                                     color:'#000', 
                                                     padding:(window.width*0.06), 
-                                                    // fontFamily: 'Martel-Bold', 
+                                                    fontFamily: 'Nunito-Regular',  
                                                     fontSize: (window.width)*0.04
                                                 }}
                                             >
@@ -145,7 +177,7 @@ class HomeScreen extends React.Component {
                                                     flexShrink: 1,
                                                     color:'#000', 
                                                     padding:(window.width*0.06), 
-                                                    // fontFamily: 'Martel-Bold', 
+                                                    fontFamily: 'Nunito-Regular', 
                                                     fontSize: (window.width)*0.04
                                                 }}
                                             >

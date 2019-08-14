@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 class ProfileScreen extends React.Component {
-    static navigationOptions = {
-      title: 'Title goes here'
-    };
+    // static navigationOptions = {
+    //   title: 'Title goes here'
+    // };
 
     constructor() {
         super();
@@ -43,14 +43,6 @@ class ProfileScreen extends React.Component {
 
         if (!loading) {
             return (
-      
-                // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                //     <Text>Details Screen</Text>
-                //     <Text>id: {JSON.stringify(id)}</Text>
-                //     <Text>title: {JSON.stringify(title)}</Text>
-                //     <Text>body: {JSON.stringify(body)}</Text>
-                // </View>\
-
                 <ScrollView>
                     <View style={styles.container}>
                         <View style={styles.header}>
@@ -107,13 +99,14 @@ const styles = StyleSheet.create({
       flex:1,
     },
     header:{
-        // flexDirection: 'row',
+        flexDirection: 'row',
         padding:30,
         alignItems: 'center',
         backgroundColor: "#00BFFF",
     },
     headerTitle:{
       fontSize:30,
+      fontFamily: 'Nunito-Bold',
       color:"#FFFFFF",
       marginTop:10,
     },
@@ -128,6 +121,7 @@ const styles = StyleSheet.create({
     },
     postTitle:{
       fontSize:26,
+      fontFamily: 'Nunito-Regular',
       fontWeight:'600',
     },
     postDescription:{
