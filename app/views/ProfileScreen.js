@@ -6,13 +6,32 @@ class ProfileScreen extends React.Component {
       title: 'Welcome',
     };
     render() {
-      const {navigate} = this.props.navigation;
+        const { navigation } = this.props;
+        const id = navigation.getParam('id', 'NO-ID');
+        const title = navigation.getParam('title', 'some default value');
+        const body = navigation.getParam('body', 'some default value');
       return (
-        // <Button
-        //   title="Go to Jane's profile"
-        //   onPress={() => navigate('Profile', {name: 'Jane'})}
-        // />
-        <Text>Inside ProfileScreen</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+        <Text>id: {JSON.stringify(id)}</Text>
+        <Text>title: {JSON.stringify(title)}</Text>
+        <Text>body: {JSON.stringify(body)}</Text>
+        {/* <Button
+          title="Go to Details... again"
+          onPress={() =>
+            this.props.navigation.push('Details', {
+              itemId: Math.floor(Math.random() * 100),
+            })}
+        />
+        <Button
+          title="Go to Home"
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
+        <Button
+          title="Go back"
+          onPress={() => this.props.navigation.goBack()}
+        /> */}
+      </View>
       );
     }
 }
