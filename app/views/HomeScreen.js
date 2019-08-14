@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
-import { Button, View, Text, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -16,20 +17,8 @@ class HomeScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getPostsFromApi();
-        // try {
-        //     let response = await fetch(
-        //       'https://jsonplaceholder.typicode.com/posts',
-        //     );
-        //     let responseJson = await response.json();
-        //     this.setState({
-        //         dataSource: responseJson,
-        //         loading: false
-        //     })
-        //     // return responseJson.movies;
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        this._retrieveData();
+        // this.getPostsFromApi();
     }
 
     async getPostsFromApi() {
@@ -42,13 +31,43 @@ class HomeScreen extends React.Component {
                 dataSource: responseJson,
                 loading: false
             })
+            this._storeData()
+        } catch (error) {
+            console.log(error);
+            this._retrieveData();
+        }
+    }
+
+    _storeData = async () => {
+        try {
+            await AsyncStorage.setItem('postsData', JSON.stringify(this.state.dataSource));
+            console.log('data storedd in cache');
         } catch (error) {
             console.error(error);
         }
     }
-    _onPostPress () {
-        this.props.navigation.navigate('Profile', {title: "item.title"});
+
+    _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('postsData');
+            if (value !== null) {
+                this.setState({
+                    dataSource: JSON.parse(value),
+                    loading: false
+                })
+                // We have data!!
+                // alert(value);
+                console.log('fetched Data from cache--->');
+            }
+        } catch (error) {
+            // Error retrieving data
+            console.log(error);
+        }
     }
+
+    // _onPostPress () {
+    //     this.props.navigation.navigate('Profile', {title: "item.title"});
+    // }
 
     _onRefresh = () => {
         this.setState({refreshing: true});
@@ -61,7 +80,7 @@ class HomeScreen extends React.Component {
         const { loading } = this.state; 
         const { navigate } = this.props.navigation;
 
-          if (!loading) {
+        if (!loading) {
               return (
                 <ScrollView
                     refreshControl={
@@ -97,11 +116,11 @@ class HomeScreen extends React.Component {
               </ScrollView>
                 
               )
-          } else {
-                return (
-                    <ActivityIndicator/>
-                )
-          }   
+        } else {
+            return (
+                <ActivityIndicator/>
+            )
+        }   
     }
 }
 export default HomeScreen;
