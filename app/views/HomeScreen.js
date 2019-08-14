@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
-import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, ScrollView, RefreshControl, Dimensions} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+const window = Dimensions.get('window');
 class HomeScreen extends React.Component {
     static navigationOptions = {
       title: 'Posts List',
@@ -88,22 +89,72 @@ class HomeScreen extends React.Component {
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                                 return (
-                                    <TouchableOpacity
-                                        // {...data.item}
-                                        // onPress={()=>this._onPostPress(item.title)}
+                                    // <TouchableOpacity
+                                    //     onPress={() => {
+                                    //         /* 1. Navigate to the Details route with params */
+                                    //         this.props.navigation.navigate('Profile', {
+                                    //         id: item.id,
+                                    //         title: item.title,
+                                    //         body: item.body
+                                    //         });
+                                    //     }}
+                                    // >
+                                    //     <View style={{ backgroundColor: '#E4E4E4', borderRadius: 20, padding: 5,  margin:10, minHeight: 40}}>
+                                    //         <Text style={{fontSize:22}}>{item.title}</Text>
+                                    //     </View>
+                                    // </TouchableOpacity>
+
+                                    <TouchableOpacity 
                                         onPress={() => {
                                             /* 1. Navigate to the Details route with params */
                                             this.props.navigation.navigate('Profile', {
-                                            id: item.id,
-                                            title: item.title,
-                                            body: item.body
+                                                userId: item.userId,
+                                                id: item.id,
+                                                title: item.title,
+                                                body: item.body
                                             });
                                         }}
                                     >
-                                        <View style={{ backgroundColor: '#E4E4E4', borderRadius: 20, padding: 5,  margin:10, minHeight: 40}}>
-                                            <Text style={{fontSize:22}}>{item.title}</Text>
+                                        <View 
+                                            style={{
+                                                alignItems:'center', 
+                                                justifyContent:'flex-start', 
+                                                backgroundColor:'rgba(255,255,255,1)', 
+                                                margin:(window.width)*0.03, 
+                                                borderRadius:20,
+                                                flexDirection:'row',
+                                                shadowColor: '#000',
+                                                shadowOffset: { width: 0, height: 4 },
+                                                shadowOpacity: 1,
+                                                shadowRadius: 2,elevation: 6,
+                                            }}
+                                        >
+                                            <Text 
+                                                style={{
+                                                    color:'#000', 
+                                                    padding:(window.width*0.06), 
+                                                    // fontFamily: 'Martel-Bold', 
+                                                    fontSize: (window.width)*0.04
+                                                }}
+                                            >
+                                                {item.userId}
+                                            </Text>
+
+                                            <Text 
+                                                style={{
+                                                    flexShrink: 1,
+                                                    color:'#000', 
+                                                    padding:(window.width*0.06), 
+                                                    // fontFamily: 'Martel-Bold', 
+                                                    fontSize: (window.width)*0.04
+                                                }}
+                                            >
+                                                {item.title}
+                                            </Text>
                                         </View>
                                     </TouchableOpacity>
+
+
                                 )
                             }}      
                         />
