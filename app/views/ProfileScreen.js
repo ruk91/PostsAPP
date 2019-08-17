@@ -6,31 +6,85 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    ActivityIndicator 
+    ActivityIndicator,
+    Dimensions,
+    FlatList
 } from 'react-native';
 
+import MAIcon from 'react-native-vector-icons/Ionicons'
+const window = Dimensions.get('window'); 
+
 class ProfileScreen extends React.Component {
-    // static navigationOptions = {
-    //   title: 'Title goes here'
-    // };
+  static navigationOptions = ({navigation}) => {
+    const {state} = navigation;
+
+    return {
+        gesturesEnabled: false,
+        title: 'Profile',
+        headerTintColor: '#FFF',
+          titleStyle: {
+            color: '#FFF',  
+          },
+        headerStyle: { 
+            backgroundColor: '#00BFFF', 
+            height: (window.height)*.1,
+            elevation:0,
+            borderBottomColor: 'transparent'
+        },
+        headerTitleStyle:{
+            fontSize:(window.height)*0.03,
+            fontFamily:'Nunito-Black',
+            fontWeight:'normal',
+            alignSelf:'center',
+            textAlign:'center',
+            flex: 1
+        },
+        headerLeft:
+        <MAIcon
+            style={{paddingLeft: (window.width)*0.05 }}
+            onPress={ () => navigation.navigate('Home')}
+            name= 'md-arrow-round-back'
+            size={ (window.width)*0.06 }
+            color="#FFF"
+        />   ,
+         headerRight: <View/>   
+    };
+};
+
 
     constructor() {
         super();
-        // const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});  
         this.state = {
             loading: true,
-            title: 'Title goes here'
+            imageloading: true,
+            dataSource: ''
         }
     }
 
     componentDidMount () {
-        this._setParamsToState();
+      this.getImagesFromApi();
+      this._setParamsToState();
     }
+
+    async getImagesFromApi() {
+      try {
+          let response = await fetch(
+            'https://jsonplaceholder.typicode.com/photos?album=1',
+          );
+          let responseJson = await response.json();
+          console.log('fetched Data from api--->');
+          this.setState({
+              dataSource: responseJson,
+              imageloading: false
+          })
+      } catch (error) {
+          console.log(error);
+      }
+  }
 
     _setParamsToState = () => {
         this.setState({
             loading: false,
-            // title: this.props.getParam('title')
         })
     }
 
@@ -43,48 +97,51 @@ class ProfileScreen extends React.Component {
 
         if (!loading) {
             return (
-                <ScrollView>
-                    <View style={styles.container}>
-                        <View style={styles.header}>
-                            {/* <Text style={styles.headerTitle}>
-                                {id}.
-                            </Text> */}
-                            <Text style={styles.headerTitle}>
-                                {title}
-                            </Text>
-                        </View>
+              <View style={styles.container}>
+                  <View style={styles.header}>
+                      <Text style={styles.headerTitle}>
+                          {title}
+                      </Text>
+                  </View>
 
-                        <View style={styles.postContent}>
-                            <Text style={styles.postTitle}>
-                                {body}
-                            </Text>
-
-                            {/* <Text style={styles.postDescription}>
-                                {body}
-                            </Text>
-
-                            <Text style={styles.tags}>
-                                Lorem, ipsum, dolor, sit, amet, consectetuer, adipiscing, elit. 
-                            </Text>
-
-                            <Text style={styles.date}>
-                                2017-11-27 13:03:01
-                            </Text>
-
-                            <View style={styles.profile}>
-                                <Image style={styles.avatar}
-                                source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
-
-                                <Text style={styles.name}>
-                                    Johan Doe
-                                </Text>
-                            </View>
-                            <TouchableOpacity style={styles.shareButton}>
-                                <Text style={styles.shareButtonText}>Like</Text>  
-                            </TouchableOpacity>  */}
-                        </View>
+                  <ScrollView>
+                    <View style={styles.postContent}>
+                        <Text style={styles.postTitle}>
+                            {body}
+                        </Text>
                     </View>
+
+                    <View style={styles.photosCard}>
+                      <Text style={styles.cardTittle}>Album</Text>
+
+                        <View style={styles.photosContainer}>
+                          <FlatList
+                            data={this.state.dataSource}
+                            renderItem={({ item }) => {
+                              return (
+                                <TouchableOpacity 
+                                    onPress={() => {
+                                        /* 1. Navigate to the Details route with params */
+                                        this.props.navigation.navigate('Image', {
+                                          albumId: item.albumId,
+                                            id: item.id,
+                                            title: item.title,
+                                            url: item.url
+                                        });
+                                    }}
+                                >
+                                  <Image style={styles.photo} source={{uri: item.thumbnailUrl}} />
+                                </TouchableOpacity>
+                              )
+                            }}   
+                            numColumns={3}   
+                        />
+                        
+                      </View>
+                  </View>
+
                 </ScrollView>
+              </View>  
             );
         } else {
             return (
@@ -95,78 +152,52 @@ class ProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
-      flex:1,
-    },
-    header:{
-        flexDirection: 'row',
-        padding:30,
-        alignItems: 'center',
-        backgroundColor: "#00BFFF",
-    },
-    headerTitle:{
-      fontSize:30,
-      fontFamily: 'Nunito-Bold',
-      color:"#FFFFFF",
-      marginTop:10,
-    },
-    name:{
-      fontSize:22,
-      color:"#FFFFFF",
-      fontWeight:'600',
-    },
-    postContent: {
-      flex: 1,
-      padding:30,
-    },
-    postTitle:{
-      fontSize:26,
-      fontFamily: 'Nunito-Regular',
-      fontWeight:'600',
-    },
-    postDescription:{
-      fontSize:16,
-      marginTop:10,
-    },
-    tags:{
-      color: '#00BFFF',
-      marginTop:10,
-    },
-    date:{
-      color: '#696969',
-      marginTop:10,
-    },
-    avatar: {
-      width: 80,
-      height: 80,
-      borderRadius: 35,
-      borderWidth: 4,
-      borderColor: "#00BFFF",
-    },
-    profile:{
-      flexDirection: 'row',
-      marginTop:20
-    },
-    name:{
-      fontSize:22,
-      color:"#00BFFF",
-      fontWeight:'600',
-      alignSelf:'center',
-      marginLeft:10
-    }, 
-    shareButton: {
-      marginTop:10,
-      height:45,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius:30,
-      backgroundColor: "#00BFFF",
-    },
-    shareButtonText:{
-      color: "#FFFFFF",
-      fontSize:20,
-    }
-  });
+  container:{
+    flex:1,
+  },
+  header:{
+    flexDirection: 'row',
+    padding:30,
+    alignItems: 'center',
+    backgroundColor: "#00BFFF",
+  },
+  headerTitle:{
+    fontSize:30,
+    fontFamily: 'Nunito-Bold',
+    color:"#000",
+    marginTop:5,
+  },
+  postContent: {
+    flex: 1,
+    padding:30,
+  },
+  postTitle:{
+    fontSize:26,
+    fontFamily: 'Nunito-Regular',
+    fontWeight:'600',
+  },
+  photosContainer:{
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    height: 'auto',
+  },
+  photosCard:{
+    marginTop:10,
+    justifyContent: 'center',
+    margin: (window.width)*0.03
+  },
+  photo:{
+    width:(window.width)*.3,
+    height:(window.width)*.3,
+    margin:(window.width)*.005,
+    // marginRight:5,
+  },
+  cardTittle:{
+    color:"#000",
+    fontFamily: 'Nunito-Black',
+    fontSize:22,
+    marginBottom:5,
+  },
+});
 
 export default ProfileScreen;

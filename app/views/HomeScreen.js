@@ -4,32 +4,27 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const window = Dimensions.get('window');
 class HomeScreen extends React.Component {
-    // static navigationOptions = {
-    //   title: 'Posts List',
-    // };
+
     static navigationOptions = ({navigation}) => {
         
         const {state} = navigation;
 
         return {
             title: 'Posts',
-            headerTintColor: '#000',
+            headerTintColor: '#FFF',
                 titleStyle: {
-                    color: '#000',
+                    color: '#FFF',
                 },
             headerLeft: null,
             headerStyle: { 
-                backgroundColor: 'transparent', 
-                // position: 'absolute',
-                // top: 0,
-                // left: 0,
-                // right: 0,
+                backgroundColor: '#00BFFF', 
+
                 elevation:0,
                 borderBottomColor: 'transparent'
             },
             headerTitleStyle:{
                 fontFamily:'Nunito-Black',
-                // fontWeight:'normal',
+                fontWeight:'normal',
                 fontSize:(window.height)*0.03,
                 alignSelf:'center',
                 textAlign:'center',
@@ -111,6 +106,7 @@ class HomeScreen extends React.Component {
         if (!loading) {
             return (
                 <ScrollView
+                    style={{ backgroundColor: '#00BFFF'}}
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
@@ -185,8 +181,6 @@ class HomeScreen extends React.Component {
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
-
-
                                 )
                             }}      
                         />
