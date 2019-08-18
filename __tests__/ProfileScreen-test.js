@@ -21,56 +21,66 @@ import {
   Dimensions
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import ImageScreen from '../app/views/ImageScreen';
+import ProfileScreen from '../app/views/ProfileScreen';
 
 configure({adapter: new Adapter()});
 
-describe('<ImageScreen />', () => {
+describe('<ProfileScreen />', () => {
 
   it('renders one <ScrollView /> components', () => {
-    const wrapper = shallow(<ImageScreen />);
+    const wrapper = shallow(<ProfileScreen />);
     expect(wrapper.find(ScrollView)).to.have.lengthOf(1);
   });
 
   it('renders one <View /> components', () => {
-    const wrapper = shallow(<ImageScreen />);
-    expect(wrapper.find(View)).to.have.lengthOf(2);
+    const wrapper = shallow(<ProfileScreen />);
+    expect(wrapper.find(View)).to.have.lengthOf(5);
   });
 
   it('renders one <Text /> components', () => {
-    const wrapper = shallow(<ImageScreen />);
-    expect(wrapper.find(Text)).to.have.lengthOf(1);
+    const wrapper = shallow(<ProfileScreen />);
+    expect(wrapper.find(Text)).to.have.lengthOf(2);
   });
 
   it('renders one <Image /> components', () => {
-    const wrapper = shallow(<ImageScreen />);
+    const wrapper = shallow(<ProfileScreen />);
     expect(wrapper.find(Image)).to.have.lengthOf(1);
   });
 
+  it('renders one <FlatList /> components', () => {
+    const wrapper = shallow(<ProfileScreen />);
+    expect(wrapper.find(FlatList)).to.have.lengthOf(1);
+  });
+
+  it('renders one <TouchableOpacity /> components', () => {
+    const wrapper = shallow(<ProfileScreen />);
+    expect(wrapper.find(TouchableOpacity)).to.have.lengthOf(1);
+  });
+
   it('renders one <ActivityIndicator /> components', () => {
-    const wrapper = shallow(<ImageScreen />);
+    const wrapper = shallow(<ProfileScreen />);
     expect(wrapper.find(ActivityIndicator)).to.have.lengthOf(1);
   });
 
   // it('renders an `.icon-star`', () => {
-  //   const wrapper = shallow(<ImageScreen />);
+  //   const wrapper = shallow(<ProfileScreen />);
   //   expect(wrapper.find('.icon-star')).to.have.lengthOf(1);
   // });
 
   // it('renders children when passed in', () => {
   //   const wrapper = shallow((
-  //     <ImageScreen>
+  //     <ProfileScreen>
   //       <div className="unique" />
-  //     </ImageScreen>
+  //     </ProfileScreen>
   //   ));
   //   expect(wrapper.contains(<div className="unique" />)).to.equal(true);
   // });
 
-  // it('simulates click events', () => {
-  //   const onButtonClick = sinon.spy();
-  //   const wrapper = shallow(<Foo onButtonClick={onButtonClick} />);
-  //   wrapper.find('button').simulate('click');
-  //   expect(onButtonClick).to.have.property('callCount', 1);
-  // });
+  it('simulates click events', () => {
+    const onPress = sinon.spy();
+    const wrapper = shallow(<TouchableOpacity onPress={this._onPressImage()} />);
+    wrapper.find('button').simulate('click');
+    expect(this._onPressImage()).to.have.property('callCount', 1);
+  });
 });
 

@@ -21,25 +21,55 @@ describe('<HomeScreen />', () => {
     expect(wrapper.find(ScrollView)).to.have.lengthOf(1);
   });
 
-  it('renders an `.icon-star`', () => {
+  it('renders one <RefreshControl /> components', () => {
     const wrapper = shallow(<HomeScreen />);
-    expect(wrapper.find('.icon-star')).to.have.lengthOf(1);
+    expect(wrapper.find(RefreshControl)).to.have.lengthOf(1);
   });
 
-  it('renders children when passed in', () => {
-    const wrapper = shallow((
-      <HomeScreen>
-        <div className="unique" />
-      </HomeScreen>
-    ));
-    expect(wrapper.contains(<div className="unique" />)).to.equal(true);
+  it('renders one <FlatList /> components', () => {
+    const wrapper = shallow(<HomeScreen />);
+    expect(wrapper.find(FlatList)).to.have.lengthOf(1);
   });
+
+  it('renders one <TouchableOpacity /> components', () => {
+    const wrapper = shallow(<HomeScreen />);
+    expect(wrapper.find(TouchableOpacity)).to.have.lengthOf(1);
+  });
+
+  it('renders one <View /> components', () => {
+    const wrapper = shallow(<HomeScreen />);
+    expect(wrapper.find(View)).to.have.lengthOf(1);
+  });
+
+  it('renders one <Text /> components', () => {
+    const wrapper = shallow(<HomeScreen />);
+    expect(wrapper.find(Text)).to.have.lengthOf(2);
+  });
+
+  it('renders one <ActivityIndicator /> components', () => {
+    const wrapper = shallow(<HomeScreen />);
+    expect(wrapper.find(ActivityIndicator)).to.have.lengthOf(1);
+  });
+
+  // it('renders an `.icon-star`', () => {
+  //   const wrapper = shallow(<HomeScreen />);
+  //   expect(wrapper.find('.icon-star')).to.have.lengthOf(1);
+  // });
+
+  // it('renders children when passed in', () => {
+  //   const wrapper = shallow((
+  //     <HomeScreen>
+  //       <div className="unique" />
+  //     </HomeScreen>
+  //   ));
+  //   expect(wrapper.contains(<div className="unique" />)).to.equal(true);
+  // });
 
   it('simulates click events', () => {
-    const onButtonClick = sinon.spy();
-    const wrapper = shallow(<Foo onButtonClick={onButtonClick} />);
+    const onPress = sinon.spy();
+    const wrapper = shallow(<TouchableOpacity onPress={this._onPressPost()} />);
     wrapper.find('button').simulate('click');
-    expect(onButtonClick).to.have.property('callCount', 1);
+    expect(this._onPressPost()).to.have.property('callCount', 1);
   });
 });
 
