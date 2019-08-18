@@ -91,6 +91,15 @@ class ProfileScreen extends React.Component {
         })
     }
 
+    _onPressImage = (item) => {
+      this.props.navigation.navigate('Image', {
+        albumId: item.albumId,
+        id: item.id,
+        title: item.title,
+        url: item.url
+      });
+    }
+
     render() {
         const { loading } = this.state; 
 
@@ -118,17 +127,7 @@ class ProfileScreen extends React.Component {
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                               return (
-                                <TouchableOpacity 
-                                    onPress={() => {
-                                        /* 1. Navigate to the Details route with params */
-                                        this.props.navigation.navigate('Image', {
-                                          albumId: item.albumId,
-                                          id: item.id,
-                                          title: item.title,
-                                          url: item.url
-                                        });
-                                    }}
-                                >
+                                <TouchableOpacity onPress={() => { this._onPressImage(item)}}>
                                   <Image style={styles.photo} source={{uri: item.thumbnailUrl}} />
                                 </TouchableOpacity>
                               )

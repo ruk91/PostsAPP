@@ -63,23 +63,6 @@ class ImageScreen extends React.Component {
         this._setParamsToState();
     }
 
-    // componentWillReceiveProps(nextProps) {
-        // if (nextProps.navigation.state.params) {
-        //     this.setState({
-        //         title: nextProps.navigation.state.params.title,
-        //         url: nextProps.navigation.state.params.url,
-        //     });
-        // }
-        // this._loadPosts(nextProps)
-    // }
-
-    // _loadPosts(){
-    //     this.setState({
-    //         title: nextProps.navigation.state.params.title,
-    //         url: nextProps.navigation.state.params.url,
-    //     });
-    // }
-
     _setParamsToState = () => {
         this.setState({
             loading: false,

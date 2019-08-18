@@ -120,7 +120,6 @@ class HomeScreen extends React.Component {
 
     render() {
         const { loading } = this.state; 
-        // const { navigate } = this.props.navigation;
 
         if (!loading) {
             return (
@@ -136,9 +135,7 @@ class HomeScreen extends React.Component {
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                                 return (
-                                    <TouchableOpacity 
-                                        onPress={() => { this._onPressPost(item)}}
-                                    >
+                                    <TouchableOpacity onPress={() => { this._onPressPost(item)}}>
                                         <View style={styles.postContainer}>
                                             <Text style={styles.postID}>
                                                 {item.userId}
