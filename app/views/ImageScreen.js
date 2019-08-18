@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 const window = Dimensions.get('window'); 
 
-import MAIcon from 'react-native-vector-icons/Ionicons'
+import MAIcon from 'react-native-vector-icons/Ionicons';
+// import CustomImage from '../components/CustomImage';
 
 class ImageScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -49,17 +50,35 @@ class ImageScreen extends React.Component {
     };
 };
 
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loading: true,
+            title: this.props.navigation.state.params.title,
+            url: this.props.navigation.state.params.url,
         }
     }
 
     componentDidMount() {
         this._setParamsToState();
     }
+
+    // componentWillReceiveProps(nextProps) {
+        // if (nextProps.navigation.state.params) {
+        //     this.setState({
+        //         title: nextProps.navigation.state.params.title,
+        //         url: nextProps.navigation.state.params.url,
+        //     });
+        // }
+        // this._loadPosts(nextProps)
+    // }
+
+    // _loadPosts(){
+    //     this.setState({
+    //         title: nextProps.navigation.state.params.title,
+    //         url: nextProps.navigation.state.params.url,
+    //     });
+    // }
 
     _setParamsToState = () => {
         this.setState({
@@ -70,24 +89,22 @@ class ImageScreen extends React.Component {
 
     render() {
         const { loading } = this.state; 
-        const { navigation } = this.props;
-        const id = navigation.getParam('id', 'NO-ID');
-        const title = navigation.getParam('title', 'some default value');
-        const url = navigation.getParam('url', 'some default value');
-
+       
         if (!loading) {
             return (
                 <ScrollView>
                     <View style={styles.header}>
                         <Text style={styles.headerTitle}>
-                            {title}
+                            {this.state.title}
                         </Text>
                     </View>
-
+                    
                     <View style={styles.container}>
-                        <Image style={styles.photo} source={{uri: url}} />
+                        <Image style={styles.photo} source={{uri: this.state.url}} />
                     </View>
-
+                    {/* <CustomImage
+                        url={url}
+                    /> */}
                 </ScrollView>
             );
         } else {

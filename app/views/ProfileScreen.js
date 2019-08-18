@@ -52,11 +52,14 @@ class ProfileScreen extends React.Component {
 };
 
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loading: true,
             imageloading: true,
+            title: this.props.navigation.state.params.title,
+            body: this.props.navigation.state.params.body,
+            userId: this.props.navigation.state.params.userId,
             dataSource: ''
         }
     }
@@ -90,24 +93,20 @@ class ProfileScreen extends React.Component {
 
     render() {
         const { loading } = this.state; 
-        const { navigation } = this.props;
-        const id = navigation.getParam('id', 'NO-ID');
-        const title = navigation.getParam('title', 'some default value');
-        const body = navigation.getParam('body', 'some default value');
 
         if (!loading) {
             return (
               <View style={styles.container}>
                   <View style={styles.header}>
                       <Text style={styles.headerTitle}>
-                          {title}
+                          {this.state.title}
                       </Text>
                   </View>
 
                   <ScrollView>
                     <View style={styles.postContent}>
                         <Text style={styles.postTitle}>
-                            {body}
+                            {this.state.body}
                         </Text>
                     </View>
 
@@ -124,9 +123,9 @@ class ProfileScreen extends React.Component {
                                         /* 1. Navigate to the Details route with params */
                                         this.props.navigation.navigate('Image', {
                                           albumId: item.albumId,
-                                            id: item.id,
-                                            title: item.title,
-                                            url: item.url
+                                          id: item.id,
+                                          title: item.title,
+                                          url: item.url
                                         });
                                     }}
                                 >
