@@ -132,6 +132,7 @@ class HomeScreen extends React.Component {
                             renderItem={({ item }) => {
                                 return (
                                     <CardComponent
+                                        id='card_component'
                                         onPress={() => { this._onPressPost(item)}}
                                         postID = {item.userId}
                                         postTitle = {item.title} 

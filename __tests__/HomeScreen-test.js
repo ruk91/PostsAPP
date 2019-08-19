@@ -68,3 +68,17 @@ describe('<HomeScreen />', () => {
   });
 });
 
+describe('post viewing flow', () => {
+    
+  it('should redirect to profile', async () => {
+    await device.reloadReactNative();
+    await expect(element(by.id('card_component'))).toBeVisible();
+      
+    await element(by.id('card_component')).tap();
+      
+    // await expect(element(by.text('Welcome'))).toBeVisible();
+    await expect(element(by.id('card_component'))).toNotExist();
+  });
+  
+});
+
