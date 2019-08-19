@@ -3,7 +3,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableOpacity,
     ScrollView,
     ActivityIndicator,
@@ -11,7 +10,11 @@ import {
     FlatList
 } from 'react-native';
 
-import MAIcon from 'react-native-vector-icons/Ionicons'
+import MAIcon from 'react-native-vector-icons/Ionicons';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
+import TitleComponent from '../components/TitleComponent';
+import ContentComponent from '../components/ContentComponent';
 const window = Dimensions.get('window'); 
 
 class ProfileScreen extends React.Component {
@@ -106,18 +109,24 @@ class ProfileScreen extends React.Component {
         if (!loading) {
             return (
               <View style={styles.container}>
-                  <View style={styles.header}>
+                  {/* <View style={styles.header}>
                       <Text style={styles.headerTitle}>
                           {this.state.title}
                       </Text>
-                  </View>
+                  </View> */}
+                  <TitleComponent
+                    title={this.state.title}
+                  />
 
                   <ScrollView>
-                    <View style={styles.postContent}>
+                    {/* <View style={styles.postContent}>
                         <Text style={styles.postTitle}>
                             {this.state.body}
                         </Text>
-                    </View>
+                    </View> */}
+                    <ContentComponent
+                      content={this.state.body}
+                    />
 
                     <View style={styles.photosCard}>
                       <Text style={styles.cardTittle}>Album</Text>
@@ -128,7 +137,18 @@ class ProfileScreen extends React.Component {
                             renderItem={({ item }) => {
                               return (
                                 <TouchableOpacity onPress={() => { this._onPressImage(item)}}>
-                                  <Image style={styles.photo} source={{uri: item.thumbnailUrl}} />
+                                  {/* <Image style={styles.photo} source={{uri: item.thumbnailUrl}} /> */}
+                                  <Image 
+                                    source={{ uri: item.thumbnailUrl }} 
+                                    indicator={Progress.Circle} 
+                                    indicatorProps={{
+                                        size: 80,
+                                        borderWidth: 0,
+                                        color: 'rgba(0, 191, 255, 1)',
+                                        unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                                    }}
+                                    style={styles.photo}
+                                  />
                                 </TouchableOpacity>
                               )
                             }}   

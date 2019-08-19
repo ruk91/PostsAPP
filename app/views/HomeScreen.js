@@ -1,16 +1,13 @@
 import React, {Fragment} from 'react';
 import { 
-    View, 
-    Text, 
     FlatList, 
     ActivityIndicator, 
-    TouchableOpacity, 
     ScrollView, 
     RefreshControl, 
-    Dimensions,
-    StyleSheet
+    Dimensions
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import CardComponent from '../components/CardComponent';
 
 const window = Dimensions.get('window');
 class HomeScreen extends React.Component {
@@ -43,7 +40,6 @@ class HomeScreen extends React.Component {
         };
         
     };
-
 
     constructor() {
         super();
@@ -135,17 +131,11 @@ class HomeScreen extends React.Component {
                             data={this.state.dataSource}
                             renderItem={({ item }) => {
                                 return (
-                                    <TouchableOpacity onPress={() => { this._onPressPost(item)}}>
-                                        <View style={styles.postContainer}>
-                                            <Text style={styles.postID}>
-                                                {item.userId}
-                                            </Text>
-
-                                            <Text style={styles.postTitle}>
-                                                {item.title}
-                                            </Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                    <CardComponent
+                                        onPress={() => { this._onPressPost(item)}}
+                                        postID = {item.userId}
+                                        postTitle = {item.title} 
+                                    />
                                 )
                             }}      
                         />
@@ -159,31 +149,4 @@ class HomeScreen extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    postContainer: {
-        alignItems:'center', 
-        justifyContent:'flex-start', 
-        backgroundColor:'rgba(255,255,255,1)', 
-        margin:(window.width)*0.03, 
-        borderRadius:20,
-        flexDirection:'row',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 1,
-        shadowRadius: 2,elevation: 6,
-    },
-    postID: {
-        color:'#000', 
-        padding:(window.width*0.06), 
-        fontFamily: 'Nunito-Regular',  
-        fontSize: (window.width)*0.04
-    },
-    postTitle: {
-        flexShrink: 1,
-        color:'#000', 
-        padding:(window.width*0.06), 
-        fontFamily: 'Nunito-Regular', 
-        fontSize: (window.width)*0.04
-    }
-})
 export default HomeScreen;

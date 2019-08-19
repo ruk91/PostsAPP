@@ -3,7 +3,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     ScrollView,
     ActivityIndicator,
     Dimensions
@@ -11,7 +10,9 @@ import {
 const window = Dimensions.get('window'); 
 
 import MAIcon from 'react-native-vector-icons/Ionicons';
-// import CustomImage from '../components/CustomImage';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
+import TitleComponent from '../components/TitleComponent';
 
 class ImageScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -76,18 +77,28 @@ class ImageScreen extends React.Component {
         if (!loading) {
             return (
                 <ScrollView>
-                    <View style={styles.header}>
-                        <Text style={styles.headerTitle}>
-                            {this.state.title}
-                        </Text>
-                    </View>
+
+                    <TitleComponent
+                        title={this.state.title}
+                    />
                     
                     <View style={styles.container}>
-                        <Image style={styles.photo} source={{uri: this.state.url}} />
+                        {/* <Image style={styles.photo} source={{uri: this.state.url}} /> */}
+                        
+                        <Image 
+                            source={{ uri: this.state.url }} 
+                            indicator={Progress.Circle} 
+                            indicatorProps={{
+                                size: 80,
+                                borderWidth: 0,
+                                color: 'rgba(0, 191, 255, 1)',
+                                unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                            }}
+                            style={styles.photo}
+                        />
+                        {/* <Progress.CircleSnail color={['blue']} /> */}
                     </View>
-                    {/* <CustomImage
-                        url={url}
-                    /> */}
+                
                 </ScrollView>
             );
         } else {
