@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styling in <TitleComponent/> renders TitleComponent.header styles correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#00BFFF",
+      "flexDirection": "row",
+      "padding": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontFamily": "Nunito-Bold",
+        "fontSize": 30,
+        "marginTop": 5,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Styling in <TitleComponent/> renders TitleComponent.headerTitle styles correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#00BFFF",
+      "flexDirection": "row",
+      "padding": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#000",
+        "fontFamily": "Nunito-Bold",
+        "fontSize": 30,
+        "marginTop": 5,
+      }
+    }
+  />
+</View>
+`;

@@ -82,9 +82,7 @@ class ImageScreen extends React.Component {
                         title={this.state.title}
                     />
                     
-                    <View style={styles.container}>
-                        {/* <Image style={styles.photo} source={{uri: this.state.url}} /> */}
-                        
+                    <View style={styles.container}>                        
                         <Image 
                             source={{ uri: this.state.url }} 
                             indicator={Progress.Circle} 
@@ -96,7 +94,6 @@ class ImageScreen extends React.Component {
                             }}
                             style={styles.photo}
                         />
-                        {/* <Progress.CircleSnail color={['blue']} /> */}
                     </View>
                 
                 </ScrollView>
@@ -115,25 +112,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    header:{
-        flexDirection: 'row',
-        padding:30,
-        alignItems: 'center',
-        backgroundColor: "#00BFFF",
-    },
-    headerTitle:{
-        fontSize:30,
-        fontFamily: 'Nunito-Bold',
-        color:"#000",
-        marginTop:10,
-    },
     photo:{
         marginTop: (window.width)* 0.05,
         alignSelf: 'center',
         width:(window.width)*.9,
         height:(window.width)*.9,
         margin:(window.width)*.005,
-        // marginRight:5,
     },
 })
 

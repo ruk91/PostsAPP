@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styling in <ContentComponent/> renders ContentComponent.postContent styles correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "padding": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontFamily": "Nunito-Regular",
+        "fontSize": 26,
+        "fontWeight": "600",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Styling in <ContentComponent/> renders ContentComponent.postTitle styles correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "padding": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontFamily": "Nunito-Regular",
+        "fontSize": 26,
+        "fontWeight": "600",
+      }
+    }
+  />
+</View>
+`;

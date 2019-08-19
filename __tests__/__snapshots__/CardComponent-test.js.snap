@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Styling in <CardComponent/> renders CardComponent.inputBox styles correctly 1`] = `
+<View
+  accessible={true}
+  clickable={false}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(255,255,255,1)",
+        "borderRadius": 20,
+        "elevation": 6,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "margin": 22.5,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 2,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "flexShrink": 1,
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Styling in <CardComponent/> renders CardComponent.postContainer styles correctly 1`] = `
+<View
+  accessible={true}
+  clickable={false}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(255,255,255,1)",
+        "borderRadius": 20,
+        "elevation": 6,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "margin": 22.5,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 2,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "flexShrink": 1,
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Styling in <CardComponent/> renders CardComponent.postTitle styles correctly 1`] = `
+<View
+  accessible={true}
+  clickable={false}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "rgba(255,255,255,1)",
+        "borderRadius": 20,
+        "elevation": 6,
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "margin": 22.5,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 2,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#000",
+          "flexShrink": 1,
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 30,
+          "padding": 45,
+        }
+      }
+    />
+  </View>
+</View>
+`;

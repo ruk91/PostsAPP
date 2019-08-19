@@ -109,53 +109,45 @@ class ProfileScreen extends React.Component {
         if (!loading) {
             return (
               <View style={styles.container}>
-                  {/* <View style={styles.header}>
-                      <Text style={styles.headerTitle}>
-                          {this.state.title}
-                      </Text>
-                  </View> */}
-                  <TitleComponent
-                    title={this.state.title}
+              
+                <TitleComponent
+                  title={this.state.title}
+                />
+
+                <ScrollView>
+                
+                  <ContentComponent
+                    content={this.state.body}
                   />
 
-                  <ScrollView>
-                    {/* <View style={styles.postContent}>
-                        <Text style={styles.postTitle}>
-                            {this.state.body}
-                        </Text>
-                    </View> */}
-                    <ContentComponent
-                      content={this.state.body}
-                    />
+                  <View style={styles.photosCard}>
+                    <Text style={styles.cardTittle}>Album</Text>
 
-                    <View style={styles.photosCard}>
-                      <Text style={styles.cardTittle}>Album</Text>
-
-                        <View style={styles.photosContainer}>
-                          <FlatList
-                            data={this.state.dataSource}
-                            renderItem={({ item }) => {
-                              return (
-                                <TouchableOpacity onPress={() => { this._onPressImage(item)}}>
-                                  {/* <Image style={styles.photo} source={{uri: item.thumbnailUrl}} /> */}
-                                  <Image 
-                                    source={{ uri: item.thumbnailUrl }} 
-                                    indicator={Progress.Circle} 
-                                    indicatorProps={{
-                                        size: 80,
-                                        borderWidth: 0,
-                                        color: 'rgba(0, 191, 255, 1)',
-                                        unfilledColor: 'rgba(200, 200, 200, 0.2)'
-                                    }}
-                                    style={styles.photo}
-                                  />
-                                </TouchableOpacity>
-                              )
-                            }}   
-                            numColumns={3}   
-                        />
-                        
-                      </View>
+                      <View style={styles.photosContainer}>
+                        <FlatList
+                          data={this.state.dataSource}
+                          renderItem={({ item }) => {
+                            return (
+                              <TouchableOpacity onPress={() => { this._onPressImage(item)}}>
+                                {/* <Image style={styles.photo} source={{uri: item.thumbnailUrl}} /> */}
+                                <Image 
+                                  source={{ uri: item.thumbnailUrl }} 
+                                  indicator={Progress.Circle} 
+                                  indicatorProps={{
+                                      size: 80,
+                                      borderWidth: 0,
+                                      color: 'rgba(0, 191, 255, 1)',
+                                      unfilledColor: 'rgba(200, 200, 200, 0.2)'
+                                  }}
+                                  style={styles.photo}
+                                />
+                              </TouchableOpacity>
+                            )
+                          }}   
+                          numColumns={3}   
+                      />
+                      
+                    </View>
                   </View>
 
                 </ScrollView>
@@ -172,27 +164,6 @@ class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-  },
-  header:{
-    flexDirection: 'row',
-    padding:30,
-    alignItems: 'center',
-    backgroundColor: "#00BFFF",
-  },
-  headerTitle:{
-    fontSize:30,
-    fontFamily: 'Nunito-Bold',
-    color:"#000",
-    marginTop:5,
-  },
-  postContent: {
-    flex: 1,
-    padding:30,
-  },
-  postTitle:{
-    fontSize:26,
-    fontFamily: 'Nunito-Regular',
-    fontWeight:'600',
   },
   photosContainer:{
     flexDirection: 'row',
